@@ -1,10 +1,10 @@
 package org.example;
 
-import java.nio.file.Paths;
+import java.io.File;
 
 public class PathUtil {
     public String buildPath(String folder, String file) {
-        // Hệ thống sẽ tự động sinh ra dấu \ (nếu là Windows) hoặc / (nếu là Linux/Mac)
-        return Paths.get(folder, file).toString();
+        // Refactoring: Thay vì dùng "\\" cố định, dùng File.separator
+        return folder + File.separator + file;
     }
 }
