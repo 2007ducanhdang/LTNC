@@ -1,0 +1,33 @@
+name: Bai 5 - JaCoCo Test Coverage
+
+on:
+  push:
+    branches: [ "main", "master" ]
+
+jobs:
+  coverage-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Run tests and verify coverage
+        # Đổi tên Bai_5 cho khớp với thư mục thực tế của bạn nhé
+        working-directory: ./Javacode/DangDucAnh_25023147_Week 9/Bai_5
+        run: mvn clean verify
+
+      - name: Upload JaCoCo Report
+        uses: actions/upload-artifact@v4
+        if: always() # Rất quan trọng: Phải luôn upload file dù build có bị fail do thiếu 80%
+        with:
+          name: jacoco-coverage-report
+          path: '**/target/site/jacoco/'
+          retention-days: 7
