@@ -1,0 +1,28 @@
+name: Bai 4 - Matrix OS Testing
+
+on:
+  push:
+    branches: [ "main", "master" ]
+
+jobs:
+  test-on-multiple-os:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Run Tests on ${{ matrix.os }}
+      working-directory: ./Javacode/DangDucAnh_25023147_Week 9/Bai_4
+      run: mvn clean test
