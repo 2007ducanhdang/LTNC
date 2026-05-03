@@ -28,3 +28,7 @@ jobs:
       - name: Run Tests on ${{ matrix.os }}
         working-directory: ./Bai_4
         run: mvn clean test
+        strategy:
+          fail-fast: false   # <--- THÊM ĐÚNG DÒNG NÀY VÀO ĐÂY
+          matrix:
+            os: [ ubuntu-latest, windows-latest, macos-latest ]
