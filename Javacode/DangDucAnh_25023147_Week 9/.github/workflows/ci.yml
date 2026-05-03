@@ -1,0 +1,35 @@
+name: CI/CD for Bai 3
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build and Test with Maven
+        # Chỉ định chỉ chạy test và đóng gói cho mỗi module Bai_3
+        working-directory: ./Bai_3
+        run: mvn clean package
+
+      - name: Upload JAR Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: calculator-jar
+          # Trỏ đúng đường dẫn target của Bai_3
+          path: Bai_3/target/*.jar
+          retention-days: 7
