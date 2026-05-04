@@ -23,3 +23,4 @@ jobs:
         # Trỏ vào thư mục chứa pom.xml (dùng tạm code Bài 4 hoặc Bài 5 đều được)
         working-directory: "./Javacode/DangDucAnh_25023147_Week 9/Bai_4"
         run: mvn clean compile
+        
