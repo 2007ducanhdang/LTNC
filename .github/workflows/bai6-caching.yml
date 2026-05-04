@@ -1,0 +1,25 @@
+name: Bai 6 - CI/CD Pipeline Optimization
+
+on:
+  push:
+    branches: [ "main", "master" ]
+
+jobs:
+  build-with-cache:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17 and Maven Cache
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'maven' # Đây chính là "chìa khóa" của Bài 6!
+
+      - name: Build project to test cache
+        # Trỏ vào thư mục chứa pom.xml (dùng tạm code Bài 4 hoặc Bài 5 đều được)
+        working-directory: "./Javacode/DangDucAnh_25023147_Week 9/Bai_4"
+        run: mvn clean compile
